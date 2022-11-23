@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timer</title>
+    <link rel="stylesheet" href="assets/style.css">
+    <style>
+        body{
+            background-color: rgb(169,12,43);
+        }
+        html,body{
+            margin: 0;
+            padding: 0;
+        }
+
+        .container{
+            text-align: center;
+            color: white;
+            background-image: url(outline.png);
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            margin: auto;
+            width: 450px;
+            height: 450px;
+            padding: 1.5em 4em;
+            display: flex;
+            justify-content: center;
+        }
+        h1{
+            font-family: "Brave Sans Bold", sans-serif;
+            font-size: 4.5em;
+            text-align: center;
+
+        }
+        #digits{
+            font-size: 11em;
+            margin: auto;
+        }
+        #message{
+            color: white;
+            padding: 0.2em;
+            margin:0;
+        }
+        #main{
+            width: 100vw;
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+        }
+        #wrapper{
+            height: fit-content;
+            margin: auto;
+        }
+    </style>
+</head>
+<body id="body">
+    
+    <div id="main">
+        <div id="wrapper">
+            <div class="container">
+                <h1 id="digits" onclick="init()"><span id="min"></span>:<span id="sec"></span></h1>
+            </div>
+            <h1 id="message">Absa Dragon's Den</h1>
+        </div>
+    </div>
+
+    
+
+    <script>
+
+        var minElem = document.getElementById('min');
+        var secElem = document.getElementById('sec');
+
+        var minTotal = 4;
+        var secTotal = 59;
+        minElem.innerHTML = minTotal;
+        secElem.innerHTML = secTotal;
+
+        function init(){
+            location.reload();
+        }
+
+        //Event Handler
+        var countrunner = window.setInterval(countdown, 1000)
+
+        function stopCounter(){
+            clearInterval(countrunner)
+        }
+        
+
+        function countdown(){
+            //Stop the count
+            if(minTotal <= 0 && secTotal <= 0){
+                document.getElementById("message").innerHTML = "Time's Up";
+                stopCounter();
+                document.getElementById("body").style.background = "black";
+                document.getElementById("minElem").innerHTML = "0";
+                document.getElementById("secElem").innerHTML = "00";
+            }
+            else{
+                secTotal--;
+                
+                if(secTotal < 0){
+                    secTotal = 59
+                    minTotal--;
+                    minElem.innerHTML = minTotal;
+                }
+                if(secTotal < 10){
+                    secElem.innerHTML = "0" + secTotal;                  
+                }
+                else
+                    secElem.innerHTML = secTotal;
+                
+                if(minTotal == 0)
+                    document.getElementById("body").style.background = "rgb(134,22,60)";
+                    
+            }
+        }
+
+
+    </script>
+</body>
+</html>
